@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Data
+{% endblock %}
+
+{% block main %}
+
+  <div class="row">
+    <div class="col-2">
+      <form id="back" action="/" method="get"></form>
+      <button type="submit" form="back" class="back_button m-1 p-1">Back</button>
+    </div>
+  <div class="col-8">
+    <form id="erase" action="/data" method="POST"></form>
+    <div class="container container-fluid w-75">
+      <table class="table table-responsive table-bordered border-light mt-4">
+        <thead>
+          <tr>
+            <th class="text-small">Date</th>
+            <th class="text-small">Course</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for entry in data|reverse %}
+          <tr class="text-small">
+            <td>{{ entry[0] }}</td>
+            <td>{{ entry[1] }}</td>
+            <td><button class="text-small" style="background-color: transparent; border: 0px;" form="erase" name="erase_data" value="{{ entry[2] }}">&#10005;</button></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}

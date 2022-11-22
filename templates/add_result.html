@@ -1,0 +1,113 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Add Result
+{% endblock %}
+
+{% block main %}
+  <form id="back" action="/" method="get"></form>
+  <button type="submit" form="back" class="back_button m-1 p-1">Back</button>
+  <div class="mt-4 text-small"><form id="results" action="/add_result" method="post"></form>
+    <input form="results" type="hidden" name="group_id" value="{{ group[0][0] }}">
+    <input form="results" type="hidden" name="racer_count" value="{{ count }}">
+    <div class="row">
+      <div class="col-5">
+        {% for i in range(count) %}
+          <div class="row">
+            <div class="col-8" style="text-align: right">
+              <p class="text-small">{{ racers[i][1] }}</p>
+            </div>
+            <div class="col-2" style="text-align: center">
+              <img src="static/img/avatars/{{ racers[i][3] }}" alt="Avatar for {{ racers[i][1] }}" width="50px">
+              <input form="results" type="hidden" name="id_{{ i }}" width="1%" value="{{ racers[i][0] }}">
+            </div>
+            <div class="col-2" style="text-align: center">
+              <p class="text-small">Place: </p>
+              <select class="input p-1" form="results" name="results_{{ racers[i][0] }}">
+                {% for i in range(1, 13) %}
+                  <option value="{{ i }}">{{ i }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <br>
+        {% endfor %}
+        <div style="text-align: right">
+          <p class="text-small">Date:</p>
+          <input form="results" class="input p-1" type="date" name="date" value="{{ time }}"
+          min="2022-11-01" max="2030-12-31"><br>
+        </div>
+      </div>
+      <div class="col-7" style="text-align: left">
+        {% for cup in cups %}
+          {% if cup[0] < 17%}
+            {% if cup[0] == 7 or cup[0] == 13 or cup[0] == 19 %}
+              <br>
+            {% endif %}
+            <div class="d-inline">
+              <input type="radio" name="cup_select" id="cup_{{ cup[0] }}" value="{{ cup[0] }}"/>{{ cup[1] }}
+              <!--<input type="radio" name="cup_select" id="cup_{{ cup[0] }}" class="input-hidden" value="{{ cup[0] }}"/>-->
+              <!--<label class="m-1" for="cup_{{ cup[0] }}">
+                <img src="static/img/cups/cups_{{ cup[0] }}.png" width="100px" alt="Image for {{ cup[1] }}" />
+              </label>-->
+            </div>
+          {% endif %}
+        {% endfor %}
+        <hr class="whitesmoke">
+        {% for cup in cups %}
+          {% if cup[0] < 17%}
+            <div class="hidden-courses" id="courses_{{ cup[0] }}">
+              {% for i in range(((cup[0] * 4)-3), ((cup[0] * 4) + 1)) %}
+                <div class="d-inline m-2">
+                  <input form="results" type="radio" name="course_select" id="course_{{ i }}" value="{{ i }}" /> {{ courses[i-1][1] }}
+                  <!--<input form="results" type="radio" name="course_select" id="course_{{ i }}" class="input-hidden" value="{{ i }}" />-->
+                  <!--<label for="course_{{ i }}">
+                    <img src="static/img/courses/sm/courses_{{ i }}_sm.png" width="150px" alt="Image for course {{ i }}" />
+                  </label>-->
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    <div class="text-center">
+      <button type="submit" form="results" class="select_button m-4 p-2 d-inline-block" style="width: 20%;">Add</button>
+    </div>
+  </div>
+  <script>
+
+    // set the radiobuttons to const radioButtons
+    const radioButtons = document.querySelectorAll('input[name="cup_select"]');
+
+    // add an event listener for the change event
+    for(const radioButton of radioButtons){
+      radioButton.addEventListener('change', showSelected);
+    }
+
+    // The function to change which courses to display
+    function showSelected(e) {
+      console.log(e);
+      if (this.checked) {
+        // If this radio button is checked, set the cup to this value
+        chosenCup = this.value;
+        // Hide all courses
+        for (let i = 1; i < 17; i++) {
+          document.getElementById("courses_" + i).style.display = "none";
+        }
+        // Display the courses for this cup
+        document.getElementById("courses_" + chosenCup).style.display = "block";
+      }
+    }
+
+    // Once the window has finished loading, select the first cup and show the courses
+    window.addEventListener('load', (event) => {
+      document.getElementById("cup_1").checked = true;
+      for (let i = 1; i < 17; i++) {
+        document.getElementById("courses_" + i).style.display = "none";
+      }
+      document.getElementById("courses_1").style.display = "block";
+    });
+
+  </script>
+{% endblock %}

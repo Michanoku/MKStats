@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Stats for {{ group[0][1] }}
+{% endblock %}
+
+{% block main %}
+<form id="back" action="/" method="get"></form>
+<button type="submit" form="back" class="back_button m-1 p-1">Back</button>
+<p class="text-large text-center">{{ group[0][1] }}</p>
+  <div class="row">
+    <div class="col-3">
+      <p class="text-medium ms-5">Members: {{ group[0][2] }}</p>
+      <p class="text-medium ms-5">Races: {{ races }}</p>
+    </div>
+    <div class="col-9">
+      <div class="row">
+        {% for i in range(group[0][2]) %}
+          <div class="col-3">
+            <p class="text-medium">No: {{ i + 1 }}{% if i == 0 %} &#128081;{% endif%}</p>
+            <img src="static/img/avatars/{{ rank[i]['avatar'] }}" width="150" alt="Avatar for {{ rank[i]['name'] }}"><br>
+            <p class="text-small">{{ rank[i]['name'] }}</p>
+            <p class="text-medium">{{ rank[i]['points'] }} points</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <hr class="whitesmoke">
+  <div class="row text-center mt-2">
+    {% for i in range(group[0][2]) %}
+      <div class="col-3">
+        <div class="row justify-content-md-center">
+          <div class="col-3">
+            <img src="static/img/avatars/{{ rank[i]['avatar'] }}" width="50" alt="Avatar for {{ rank[i]['name'] }}">
+          </div>
+          <div class="col-3">
+            <p class="text-small">{{ rank[i]['name'] }}</p>
+          </div>
+        </div>
+        <div class= "row">
+          <div class="col-6">
+            <p class="text-small">Group:<br>
+            {% for j in range(group[0][2])%}
+              {{ j + 1 }}. {{ g_place[i][j]}} ({{ g_pct[i][j] }}%)<br>
+            {% endfor %}
+            </p>
+          </div>
+          <div class="col-6">
+            <p class="text-small">Race:
+              {% for j in range(12) %}<br>
+                {{ j + 1 }}. {{ a_place[i][j]}} ({{ a_pct[i][j] }}%)
+              {% endfor %}
+            </p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <hr class="whitesmoke">
+  <div>
+    <p class="text-medium text-center">Results:</p>
+    {% for result in results|reverse %}
+      <div class="row justify-content-md-center">
+        <div class="col-lg-3">
+          <p class="text-small">
+            Date: {{ result["date"] }}<br>
+            1st: {{ names[result["1st_id"]] }} ({{ result["1st_place"] }})<br>
+            2nd: {{ names[result["2nd_id"]] }} ({{ result["2nd_place"] }})
+            {% if count == 3 or count == 4 %}
+              <br>
+              3rd: {{ names[result["3rd_id"]] }} ({{ result["3rd_place"] }})
+            {% endif %}
+            {% if count == 4 %}
+              <br>
+              4th: {{ names[result["4th_id"]] }} ({{ result["4th_place"] }})
+            {% endif %}
+          </p>
+        </div>
+        <div class="col-lg-3">
+          <img src="static/img/courses/sm/courses_{{ result["course_id"] }}_sm.png" width="50%" alt="Image for {{ result["course_en"] }}">
+          <p class="text-small">
+            {{ result["course_en"] }}<br>
+            {{ result["course_jp"] }}
+          </p>
+        </div>
+      </div>
+      <br>
+    {% endfor %}
+  </div>
+{% endblock %}

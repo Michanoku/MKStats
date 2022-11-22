@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Create Group
+{% endblock %}
+
+{% block main %}
+  <form id="back" action="/" method="get"></form>
+  <button type="submit" form="back" class="back_button m-1 p-1">Back</button>
+  <div class="text-medium text-center mt-3"><form id="create_form" action="/create_group" method="post" enctype="multipart/form-data"></form>
+    <p class="text-medium d-inline-block mb-5" style="width: 16%">Group Name:</p><input class="input d-inline m-2 p-1" form="create_form" type="text" name="group_name" maxlength="20"><br>
+    <p class="text-medium d-inline-block mb-4">Racer 1:</p><input class="input d-inline m-2 p-1" form="create_form" type="text" name="racer_one" maxlength="10"><input form="create_form" class="text-medium" type="file" name="file_0"><br>
+    <p class="text-medium d-inline-block mb-4">Racer 2:</p><input class="input d-inline m-2 p-1" form="create_form" type="text" name="racer_two" maxlength="10"><input form="create_form" class="text-medium" type="file" name="file_1"><br>
+    <p class="text-medium d-inline-block mb-4">Racer 3:</p><input class="input d-inline m-2 p-1" form="create_form" type="text" name="racer_three" maxlength="10"><input form="create_form" class="text-medium" type="file" name="file_2"><br>
+    <p class="text-medium d-inline-block mb-4">Racer 4:</p><input class="input d-inline m-2 p-1" form="create_form" type="text" name="racer_four" maxlength="10"><input form="create_form" class="text-medium" type="file" name="file_3"><br>
+    <button type="submit" form="create_form" class="select_button m-1 p-2" style="width: 20%">Create</button>
+  </div>
+{% endblock %}

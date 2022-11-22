@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Edit Group
+{% endblock %}
+
+{% block main %}
+  <div class="text-center"><form id="edit_group" action="/edit" method="post" enctype="multipart/form-data"></form>
+    <p class="text-medium d-inline-block mb-5" style="width: 16%">Group Name:</p><input class="input d-inline m-2 p-1" form="edit_group" type="text" name="group_name" placeholder="{{ group_name }}" maxlength="20"><br>
+    {% for racer in racers %}
+      <div class="d-inline-block">
+        <p class="text-medium d-inline-block mb-4">Racer:</p><img class="m-2"src="static/img/avatars/{{ racer[3] }}" width="50" alt="Avatar for {{ racer[1] }}">
+        <input class="input d-inline m-2 p-1" form="edit_group" type="text" name="racer_{{ racer[0] }}" maxlength="10" placeholder="{{ racer[1] }}"><input form="edit_group" class="text-medium" type="file" name="file_{{ racer[0] }}"><br>
+      </div>
+      <br>
+    {% endfor %}
+    <button type="submit" form="edit_group" class="select_button m-1 p-2" style="width: 20%">Submit</button>
+  </div>
+{% endblock %}

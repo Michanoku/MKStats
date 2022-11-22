@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Mario Kart Stats
+{% endblock %}
+
+{% block main %}
+  {% if session["user_id"] %}
+    <div class="text-center">
+      <p class="text-giant">{{ group[0][1] }}</p>
+      {% for racer in racers %}
+        <div class="d-inline-block"><form id="racer_stats_{{ racer[0] }}" action="/racer_stats" method="POST"></form>
+          <input form="racer_stats_{{ racer[0] }}" type="hidden" name="racer_id" value="{{ racer[0] }}">
+          <input class="m-3" form="racer_stats_{{ racer[0] }}" type="image" src="static/img/avatars/{{ racer[3] }}" width="150" alt="Avatar for {{ racer[1] }}">
+          <p class="text-medium">{{ racer[1] }}</p>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="text-medium text-center">
+      <form id="logout" action="/logout" method="get"></form>
+      <form id="results" action="/add_result" method="get"></form>
+      <form id="group_stats" action="/group_stats" method="get"></form>
+      <form id="course" action="/course_stats" method="get"></form>
+      <form id="daily" action="/daily_stats" method="get"></form>
+      <form id="data" action="/data" method="get"></form>
+      <form id="edit" action="/edit" method="get"></form>
+      <button class="select_button m-1 p-2" type="submit" form="group_stats">Group Stats</button>
+      <button class="select_button m-1 p-2" type="submit" form="course">Course Stats</button>
+      <button class="select_button m-1 p-2" type="submit" form="daily">Daily Stats</button>
+      <br>
+      <button type="submit" form="results" class="select_button m-1 p-2">Add Result</button>
+      <button class="select_button m-1 p-2" type="submit" form="data" class="select_button">Data</button>
+      <button class="select_button m-1 p-2" type="submit" form="edit" class="select_button">Edit</button>
+      <button type="submit" form="logout" class="select_button m-1 p-2">Logout</button>
+    </div>
+  {% else %}
+    <div class="text-medium text-center" style="margin-top: 15%">
+      <form id="create" action="/create_group" method="get"></form>
+      <form id="select" action="/select_group" method="get"></form>
+      <button type="submit" form="create" class="select_button m-1 p-2">Create Group</button>
+      <button type="submit" form="select" class="select_button m-1 p-2">Select Group</button>
+    </div>
+  {% endif %}
+{% endblock %}

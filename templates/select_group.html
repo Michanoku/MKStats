@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Select Group
+{% endblock %}
+
+{% block main %}
+  <form id="back" action="/" method="get"></form>
+  <button type="submit" form="back" class="back_button m-1 p-1">Back</button>
+  <form id="group_select" action="/select_group" method="POST"></form>
+  <div class="row justify-content-md-center">
+    <div class="col-lg-4">
+      <ul class="text-small mt-5">
+        {% for group in groups %}
+          <li class="text-medium">
+            <div class="row">
+              <div class="col-4">
+                <button class="back_button m-1 p-2" form="group_select" name="group_id" value="{{ group[0] }}">
+                  Select
+                </button>
+              </div>
+              <div class="col-4">
+                {{ group[1] }}
+              </div>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Daily Stats
+{% endblock %}
+
+{% block main %}
+  <div class="mt-4">
+    <form id="back" action="/" method="get"></form>
+    <button type="submit" form="back" class="back_button m-1 p-1">Back</button>
+    {% for i in range(dates|length) %}
+      <div class="row justify-content-md-center">
+        <div class="col-2">
+          <p class="text-medium">
+            {{ dates[i][0] }}
+          </p>
+        </div>
+        <div class="col-9">
+          {% for j in range(blocks[i]|length) %}
+            <div class="row justify-content-md-center">
+              <div class="col-4">
+                <img src="static/img/courses/sm/courses_{{ blocks[i][j]["course_id"] }}_sm.png" width="60%" alt="Image for course {{ blocks[i][j]["en_name"] }}"/>
+                <p class="text-small">{{ blocks[i][j]["en_name"] }}<br>
+                  {{ blocks[i][j]["jp_name"] }}
+                </p>
+              </div>
+              <div class="col-5">
+                <p class="text-small">1st: {{ blocks[i][j]["1st_name"] }} ({{ blocks[i][j]["1st_place"] }})<br>
+                  2nd: {{ blocks[i][j]["2nd_name"] }} ({{ blocks[i][j]["2nd_place"] }})
+                  {% if count > 2 %}
+                    <br>
+                    3rd: {{ blocks[i][j]["3rd_name"] }} ({{ blocks[i][j]["3rd_place"] }})
+                  {% endif %}
+                  {% if count > 3 %}
+                    <br>
+                    4th: {{ blocks[i][j]["4th_name"] }} ({{ blocks[i][j]["4th_place"] }})
+                  {% endif %}
+                </p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <hr class="whitesmoke">
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Course Stats
+{% endblock %}
+
+{% block main %}
+  <form id="back" action="/" method="get"></form>
+  <button type="submit" form="back" class="back_button m-1 p-1">Back</button>
+  <div class="mx-auto" style="width: 55%;"><form id="select_course" action="/course_stats" method="post"></form>
+    <div class="text-left">
+      {% for cup in cups %}
+        {% if cup[0] < 17%}
+          {% if cup[0] == 7 or cup[0] == 13 or cup[0] == 19 %}
+            <br>
+          {% endif %}
+          <div class="d-inline">
+            <input type="radio" name="cup_select" id="cup_{{ cup[0] }}" class="input-hidden" value="{{ cup[0] }}"/>
+            <label class="m-1" for="cup_{{ cup[0] }}">
+              <img src="static/img/cups/cups_{{ cup[0] }}.png" width="100px" height="100px" alt="Image for {{ cup[1] }}" />
+            </label>
+          </div>
+        {% endif %}
+      {% endfor %}
+      <hr class="whitesmoke">
+      {% for cup in cups %}
+        {% if cup[0] < 17%}
+          <div class="hidden-courses" id="courses_{{ cup[0] }}">
+            {% for i in range(((cup[0] * 4)-3), ((cup[0] * 4) + 1)) %}
+              <div class="d-inline">
+                <input form="select_course" type="submit" name="course_select" id="course_{{ i }}" class="input-hidden" value="{{ i }}" />
+                <label class="m-2" for="course_{{ i }}">
+                  <img src="static/img/courses/sm/courses_{{ i }}_sm.png" width="150px" alt="Image for course {{ i }}" />
+                </label>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  <script>
+  // add an event listener for the change event
+    const radioButtons = document.querySelectorAll('input[name="cup_select"]');
+
+    for(const radioButton of radioButtons){
+      radioButton.addEventListener('change', showSelected);
+    }
+
+    function showSelected(e) {
+      console.log(e);
+      if (this.checked) {
+        chosenCup = this.value;
+        for (let i = 1; i < 17; i++) {
+          document.getElementById("courses_" + i).style.display = "none";
+        }
+        document.getElementById("courses_" + chosenCup).style.display = "block";
+      }
+    }
+  </script>
+{% endblock %}

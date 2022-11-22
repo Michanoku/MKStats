@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Course stats for {{ course[0][2] }}
+{% endblock %}
+
+{% block main %}
+<form id="back" action="/" method="get"></form>
+      <button type="submit" form="back" class="back_button m-1 p-1">Back</button>
+  <div class="row justify-content-md-center">
+    <div class="col-6">
+      <img src="static/img/courses/bg/courses_{{ course[0][0] }}_bg.png" width="80%" alt="Image for course {{ course[0][2] }}"/>
+      <p class="text-medium">{{ course[0][2] }} / {{ course[0][3] }}</p>
+    </div>
+    <div class="col-3">
+      <img src="static/img/cups/cups_{{ cup[0][0] }}.png" width="80%" alt="Image for {{ cup[0][1] }}" />
+      <p class="text-medium">{{ cup[0][1] }}<br>{{ cup[0][2] }}</p>
+    </div>
+  </div>
+  <hr class="whitesmoke">
+  <div class="text-center">
+    <p class="text-medium">Times raced: {{ times }} ({{ percent}}% of all races)<br>
+      Most wins on this course: {{ most }}
+    </p>
+    <hr class="whitesmoke">
+    <p class="text-medium">Races:
+      {% for race in races %}<br>
+        Date: {{ race["date"] }} | Winner: {{ race["winner"] }}
+      {% endfor %}
+    </p>
+  </div>
+{% endblock %}

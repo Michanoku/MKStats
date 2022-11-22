@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Error
+{% endblock %}
+
+{% block main %}
+  <form id="back" action="/" method="get"></form>
+  <button type="submit" form="back" class="back_button m-1 p-1">Back</button>
+  <div class="text-center text-medium mt-5">
+    Oops! Something went wrong.
+    <br>
+    {{ message }}
+  </div>
+{% endblock %}
