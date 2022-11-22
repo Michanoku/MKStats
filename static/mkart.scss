@@ -1,0 +1,151 @@
+$font: verdana, arial, sans-serif;
+$base-color: whitesmoke;
+$focus-color: slateblue;
+$deepfocus-color: darkslateblue;
+$hover-color: mediumslateblue;
+$shadow: 1px 1px 2px black, 0 0 1em blue, 0 0 0.2em darkblue;
+$hover-shadow: 0 0 10px $hover-color;
+$button-border: 2px solid $base-color;
+
+%text {
+  font-family: $font;
+  color: $base-color;
+  text-shadow: $shadow;
+}
+
+%button {
+  background-color: $focus-color;
+  color: $base-color;
+  border: $button-border;
+  border-radius: 25px;
+  font-size: 30px;
+}
+
+%focus-button {
+  background-color: $deepfocus-color;
+  color: black;
+  border: 2px solid black;
+  box-shadow: 0 0 10px $base-color;
+}
+
+/// LAYOUT RELATED:
+
+#top_banner {
+  border: $button-border;
+  display: block;
+  position: relative;
+}
+
+#logo {
+  left: 5%;
+  top: 5%;
+  position: absolute;
+}
+
+#title {
+  @extend %text;
+  left: 40%;
+  top: 8%;
+  position: absolute;
+  font-size: 60px;
+}
+
+/// Layout END
+/// Text Sizes
+
+.text-small {
+  @extend %text;
+  font-size: 20px;
+}
+
+.text-medium {
+  @extend %text;
+  font-size: 30px;
+}
+
+.text-large {
+  @extend %text;
+  font-size: 40px;
+}
+
+.text-giant {
+  @extend %text;
+  font-size: 60px;
+}
+
+/// Text Sizes END
+/// Course Select
+
+label:hover {
+  cursor: pointer;
+}
+
+.input-hidden {
+  position: absolute;
+  left: -9999px;
+}
+
+.hidden-courses {
+  display: none;
+}
+
+input[type=radio]:checked + label>img {
+  border: 1px solid #fff;
+  box-shadow: 0 0 3px 3px #090;
+}
+
+/// Course Select END
+
+.whitesmoke {
+  color: whitesmoke;
+}
+
+.select_button {
+  @extend %button;
+}
+
+.back_button {
+  background-color: $focus-color;
+  color: $base-color;
+  border: $button-border;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.select_button:hover, .back_button:hover {
+  background-color: $hover-color;
+  box-shadow: $hover-shadow;
+}
+
+.select_button:focus, .back_button:focus {
+  @extend %focus-button;
+}
+
+.input {
+  background-color: $base-color;
+  border: 2px solid $focus-color;
+}
+
+.input:hover {
+  box-shadow: $hover-shadow;
+}
+
+.input:focus {
+  box-shadow: $hover-shadow;
+  outline: none !important;
+}
+
+input[type=file]::file-selector-button {
+  @extend %button;
+  padding: 5px; /// Necessary here
+  margin: 5px;  /// Necessary here
+}
+
+input[type=file]::file-selector-button:hover {
+  background-color: $hover-color;
+  box-shadow: $hover-shadow;
+}
+
+input[type=file]::file-selector-button:focus {
+  @extend %focus-button;
+}
