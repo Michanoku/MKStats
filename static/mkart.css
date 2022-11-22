@@ -1,0 +1,116 @@
+.text-giant, .text-large, .text-medium, .text-small, #title {
+  font-family: verdana, arial, sans-serif;
+  color: whitesmoke;
+  text-shadow: 1px 1px 2px black, 0 0 1em blue, 0 0 0.2em darkblue;
+}
+
+input[type=file]::file-selector-button, .select_button {
+  background-color: slateblue;
+  color: whitesmoke;
+  border: 2px solid whitesmoke;
+  border-radius: 25px;
+  font-size: 30px;
+}
+
+input[type=file]::file-selector-button:focus, .select_button:focus, .back_button:focus {
+  background-color: darkslateblue;
+  color: black;
+  border: 2px solid black;
+  box-shadow: 0 0 10px whitesmoke;
+}
+
+#top_banner {
+  border: 2px solid whitesmoke;
+  display: block;
+  position: relative;
+}
+
+#logo {
+  left: 5%;
+  top: 5%;
+  position: absolute;
+}
+
+#title {
+  left: 40%;
+  top: 8%;
+  position: absolute;
+  font-size: 60px;
+}
+
+.text-small {
+  font-size: 20px;
+}
+
+.text-medium {
+  font-size: 30px;
+}
+
+.text-large {
+  font-size: 40px;
+}
+
+.text-giant {
+  font-size: 60px;
+}
+
+label:hover {
+  cursor: pointer;
+}
+
+.input-hidden {
+  position: absolute;
+  left: -9999px;
+}
+
+.hidden-courses {
+  display: none;
+}
+
+input[type=radio]:checked + label > img {
+  border: 1px solid #fff;
+  box-shadow: 0 0 3px 3px #090;
+}
+
+.whitesmoke {
+  color: whitesmoke;
+}
+
+.back_button {
+  background-color: slateblue;
+  color: whitesmoke;
+  border: 2px solid whitesmoke;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.select_button:hover, .back_button:hover {
+  background-color: mediumslateblue;
+  box-shadow: 0 0 10px mediumslateblue;
+}
+
+.input {
+  background-color: whitesmoke;
+  border: 2px solid slateblue;
+}
+
+.input:hover {
+  box-shadow: 0 0 10px mediumslateblue;
+}
+
+.input:focus {
+  box-shadow: 0 0 10px mediumslateblue;
+  outline: none !important;
+}
+
+input[type=file]::file-selector-button {
+  padding: 5px;
+  margin: 5px;
+}
+
+input[type=file]::file-selector-button:hover {
+  background-color: mediumslateblue;
+  box-shadow: 0 0 10px mediumslateblue;
+}
+
+/*# sourceMappingURL=mkart.css.map */
